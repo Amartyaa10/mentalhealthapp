@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Insights - Mental Health for Students</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        nav {
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-brand, .nav-link {
+            font-weight: 600;
+            color: #1976d2 !important;
+        }
+        .nav-link:hover {
+            color: #1565c0 !important;
+        }
+        main {
+            padding: 2rem 0;
+        }
+        section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #1976d2;
+            font-weight: 600;
+            border-bottom: 3px solid #42a5f5;
+            padding-bottom: 0.5rem;
+        }
+        table {
+            font-size: 0.9rem;
+        }
+        canvas {
+            max-height: 400px;
+        }
+        .insights-grid {
+            display: grid;
+            gap: 1rem;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Survey Insights</h1>
+            <p class="lead">Professional Analysis from 49 Student Responses | Delhi Region, 2025</p>
+        </div>
+    </header>
+    
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">MHFS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#resources">Resources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#get-involved">Get Involved</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <section>
+            <h2>Executive Summary</h2>
+            <p>Our survey reveals moderate-high stress levels (avg. 3.84/5) driven by exams (42%) and future uncertainty (32%). Key recommendations: Enhance counseling and physical activities.</p>
+        </section>
+        
+        <section>
+            <h2>Demographic Overview</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="table-dark">
+                        <tr><th>Category</th><th>Breakdown</th><th>Percentage</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Age</td><td>Under 15: 5, 15-17: 19, 18-20: 22, 20+: 4</td><td>10% / 38% / 44% / 8%</td></tr>
+                        <tr><td>Gender</td><td>Male: 26, Female: 23, Other: 1</td><td>52% / 46% / 2%</td></tr>
+                        <tr><td>Grade</td><td>Class 9-12: 26, College: 24</td><td>53% / 47%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Key Metrics & Visualizations</h2>
+            <div class="insights-grid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Stress Sources</h4>
+                        <canvas id="stressChart"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Exercise Frequency</h4>
+                        <canvas id="exerciseChart"></canvas>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Talking About Stress</h4>
+                        <canvas id="talkChart"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Age Distribution</h4>
+                        <canvas id="ageChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive mt-4">
+                <table class="table table-bordered">
+                    <thead class="table-primary">
+                        <tr><th>Metric</th><th>Value/Insight</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Avg. Stress (1-5)</td><td>3.84 (Highest in 15-17 group)</td></tr>
+                        <tr><td>Avg. Sleep Hours</td><td>5.74 (Correlates inversely with stress)</td></tr>
+                        <tr><td>Social Media >3hrs/Day</td><td>56% Yes</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Top Student Suggestions</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Counseling (20%):</strong> Dedicated sessions and mentors.</li>
+                        <li class="list-group-item"><strong>Sports/Activities (18%):</strong> More physical education time.</li>
+                        <li class="list-group-item"><strong>Less Pressure (16%):</strong> Reduced exam focus, skill-based learning.</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Art/Recreation (12%):</strong> Creative outlets and events.</li>
+                        <li class="list-group-item"><strong>Awareness (10%):</strong> Workshops on mental health.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 MentalHealthForStudents.com | Data-Driven Insights for Student Wellbeing</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Charts (same as before, adapted)
+        const stressCtx = document.getElementById('stressChart')?.getContext('2d');
+        if (stressCtx) {
+            new Chart(stressCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Exams/Competitions', 'Future Uncertainty', 'Parents’ Expectations', 'Other'],
+                    datasets: [{ data: [42, 32, 18, 8], backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#E7E9ED'] }]
+                },
+                options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+        }
+        
+        const exerciseCtx = document.getElementById('exerciseChart')?.getContext('2d');
+        if (exerciseCtx) {
+            new Chart(exerciseCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Never', '1-2 times', '3-5 times', 'Daily'],
+                    datasets: [{ data: [34, 22, 22, 22], backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'] }]
+                },
+                options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+        }
+        
+        const talkCtx = document.getElementById('talkChart')?.getContext('2d');
+        if (talkCtx) {
+            new Chart(talkCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Never', 'Rarely', 'Sometimes', 'Often'],
+                    datasets: [{ data: [34, 40, 20, 6], backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'] }]
+                },
+                options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+        }
+        
+        const ageCtx = document.getElementById('ageChart')?.getContext('2d');
+        if (ageCtx) {
+            new Chart(ageCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Under 15', '15-17', '18-20', '20+'],
+                    datasets: [{ data: [10, 38, 44, 8], backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'] }]
+                },
+                options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+        }
+    </script>
+</body>
+</html>
